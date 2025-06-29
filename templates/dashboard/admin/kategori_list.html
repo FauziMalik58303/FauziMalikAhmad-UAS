@@ -1,0 +1,141 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block css %}
+<style>
+  /* Card dan container */
+  .card {
+    background-color: #1e1e2f;
+    color: #fff;
+  }
+
+  .card-header {
+    background-color: #27293d;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-header h5 {
+    margin: 0;
+    font-weight: 600;
+    color:white;
+  }
+
+  /* Tombol tambah */
+  .btn-outline-warning {
+    color: #ffc107;
+    border-color: #ffc107;
+  }
+  .btn-outline-warning:hover {
+    background-color: #ffc107;
+    color: #1e1e2f;
+  }
+
+  /* Tabel */
+  .table {
+    color: #fff;
+  }
+
+  .table thead {
+    background-color: #343454;
+    color: #fff !important;
+  }
+  
+  .table thead th {
+    color: #fff !important;
+    vertical-align: middle !important;
+  }
+
+  .table tbody tr {
+    border-bottom: 1px solid #444466;
+  }
+
+  .table-hover tbody tr:hover {
+    background-color: #3a3a5a;
+    color: #fff;
+  }
+
+  /* Tombol edit dan delete */
+  .btn-warning {
+    background-color: #f0ad4e;
+    border-color: #eea236;
+    color: #1e1e2f;
+  }
+  .btn-warning:hover {
+    background-color: #ec971f;
+    border-color: #d58512;
+    color: #1e1e2f;
+  }
+
+  .btn-danger {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    color: #fff;
+  }
+  .btn-danger:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+    color: #fff;
+  }
+
+  /* Font kecil dan padding */
+  .text-sm {
+    font-size: 0.875rem;
+  }
+
+  /* Center text in action column */
+  .text-center {
+    text-align: center;
+  }
+</style>
+{% endblock css %}
+
+{% block content %}
+<div class="col-12">
+  <div class="card shadow-sm">
+    <!-- Card header -->
+    <div class="card-header">
+      <h5>Daftar kategori</h5>
+      <a class="btn btn-outline-warning btn-sm" href="{% url 'admin_kategori_tambah' %}">+ Tambah</a>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-flush table-hover" id="datatable-search">
+        <thead class="thead-light">
+          <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Created At</th>
+            <th>Created By</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for kat in Kategori %}
+          <tr>
+            <td class="text-sm font-weight-normal">{{ forloop.counter }}</td>
+            <td class="text-sm font-weight-normal">{{ kat.nama }}</td>
+            <td class="text-sm font-weight-normal">{{ kat.created_at }}</td>
+            <td class="text-sm font-weight-normal">{{ kat.created_by }}</td>
+            <td class="text-sm font-weight-normal text-center">
+              <a class="btn btn-warning btn-sm" href="{% url 'admin_kategori_update' kat.id %}">edit</a>
+              <a class="btn btn-danger btn-sm" onclick="return confirm('yakin ingin menghapus?')" href="{% url 'admin_kategori_delete' kat.id %}">delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'dasboard/assets/js/plugins/datatables.js' %}"></script>
+<script>
+  const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+    searchable: true,
+    fixedHeight: true
+  })
+</script>
+{% endblock js %}

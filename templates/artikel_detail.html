@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}{{ item.judul }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: auto; padding: 20px;">
+    <h2>{{ item.judul }}</h2>
+    <p><em>Diposting pada {{ item.created_at|date:"d M Y" }}</em></p>
+    
+    {% if item.gambar %}
+        <img src="{{ item.gambar.url }}" alt="{{ item.judul }}" style="width: 100%; margin-bottom: 20px; border-radius: 8px;">
+    {% endif %}
+    
+    <p>{{ item.konten|safe}}</p>
+
+    <hr>
+    <h3>Komentar</h3>
+    {% for komen in komentar_list %}
+        <div style="margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+            <strong>{{ komen.user.username }}</strong> - {{ komen.tanggal|date:"d M Y H:i" }}<br>
+            <p>{{ komen.isi }}</p>
+        </div>
+    {% empty %}
+        <p>Belum ada komentar.</p>
+    {% endfor %}
+
+    <hr>
+    {% if user.is_authenticated %}
+        <h4>Tinggalkan Komentar</h4>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" style="padding: 8px 16px; background-color: #28a745; color: white; border: none; border-radius: 5px;">Kirim Komentar</button>
+        </form>
+    {% else %}
+        <p>Silakan <a href="{% url 'login' %}">login</a> untuk mengirim komentar.</p>
+    {% endif %}
+</div>
+{% endblock %}

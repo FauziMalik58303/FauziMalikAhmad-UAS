@@ -1,0 +1,185 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block css %}
+<style>
+  /* Card dan header gelap */
+  .card {
+    background-color: #1e1e2f;
+    color: #ffffff;
+  }
+
+  .card-header {
+    background-color: #27293d;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .card-header h5 {
+  color: #fff; /* Tambahkan baris ini */
+  }
+
+  /* Tabel */
+  .table {
+    color: #fff;
+  }
+
+  .table thead {
+    background-color: #343454;
+    color: #fff !important;
+  }
+
+  .table thead th {
+    color: #fff !important;
+    vertical-align: middle !important;
+  }
+
+  /* Ini tambahan agar teks tbody juga putih */
+  .table tbody tr {
+    background-color: #2a2a40;
+    color: #fff;
+  }
+
+  .table tbody tr:hover {
+    background-color: #3a3a60 !important;
+    color: #fff !important;
+  }
+
+  /* Username badge */
+  .username-badge {
+    background-color: #8fa4e4;
+    color: rgb(0, 0, 0);
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  /* Name color */
+  .fullname-cell {
+    color: #d3eaff;
+    font-weight: 500;
+  }
+
+  /* Icon colors */
+  .icon-staff {
+    font-size: 30px;
+    color: #02ff41;
+  }
+  .icon-nonstaff {
+    font-size: 30px;
+    color: #ff4949;
+  }
+
+  /* Badge group */
+  .badge-dark {
+    background-color: #02ff41;
+    color: rgb(7, 7, 7);
+    margin: 2px 2px;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 12px;
+  }
+
+  /* Tombol */
+  .btn-warning {
+    background-color: #f0ad4e;
+    border-color: #eea236;
+    color: #1e1e2f;
+  }
+  .btn-warning:hover {
+    background-color: #ec971f;
+    border-color: #d58512;
+    color: #1e1e2f;
+  }
+
+  .btn-danger {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    color: white;
+  }
+  .btn-danger:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+    color: white;
+  }
+
+  /* Text small */
+  .text-sm {
+    font-size: 0.875rem;
+  }
+
+  /* Center text */
+  .text-center {
+    text-align: center;
+  }
+</style>
+{% endblock css %}
+
+
+{% block content %}
+<div class="col-12">
+  <div class="card shadow-sm">
+    <div class="card-header">
+      <h5>Daftar User</h5>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-flush table-hover" id="datatable-search">
+        <thead class="thead-light">
+          <tr>
+            <th>No</th>
+            <th>Username</th>
+            <th>Nama Lengkap</th>
+            <th>Is Staff</th>
+            <th class="text-center">Groups</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in daftar_user %}
+          <tr>
+            <td class="text-sm font-weight-normal">{{ forloop.counter }}</td>
+            <td class="text-sm font-weight-normal">
+              <span class="username-badge">{{ user.username }}</span><br />
+            </td>
+            <td class="text-sm font-weight-normal fullname-cell">
+              {{ user.first_name|default:"-" }} {{ user.last_name|default:"-" }}
+            </td>
+            <td class="text-sm font-weight-normal text-center">
+              {% if user.is_staff %}
+                <span class="material-symbols-outlined icon-staff">person</span>
+              {% else %}
+                <span class="material-symbols-outlined icon-nonstaff">person_off</span>
+              {% endif %}
+            </td>
+            <td class="text-sm font-weight-normal text-center">
+              {% if user.groups.all %}
+                {% for group in user.groups.all %}
+                  <span class="badge badge-dark">{{ group.name }}</span>
+                {% endfor %}
+              {% else %}
+                <span class="badge badge-dark">---</span>
+              {% endif %}
+            </td>
+            <td class="text-sm font-weight-normal text-center">
+              <a class="btn btn-warning btn-sm" href="{% url 'admin_management_user_edit' user.id %}">Edit</a>
+              <a class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')" href="#">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'dasboard/assets/js/plugins/datatables.js' %}"></script>
+<script>
+  const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+    searchable: true,
+    fixedHeight: true
+  })
+</script>
+{% endblock js %}

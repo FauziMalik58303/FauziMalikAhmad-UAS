@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV Cahaya Dewi</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #2f3e36;
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .container {
+      background: #5a6b5c;
+      width: 60%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+    }
+    
+    .container::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 8px;
+      height: 100%;
+      background-color: #fff;
+    }
+    
+    .header {
+      text-align: center;
+      padding: 30px 20px 10px;
+      position: relative;
+    }
+    
+    .header h1 {
+      font-size: 28px;
+      color: #f7d794;
+      margin-bottom: 5px;
+    }
+    
+    .header p {
+      font-style: italic;
+      font-size: 16px;
+    }
+    
+    .foto {
+      position: absolute;
+      top: 30px;
+      right: 20px;
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 3px solid white;
+    }
+    
+    .foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .section-title {
+      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #fff;
+      border-bottom: 2px solid #fff;
+      padding-bottom: 5px;
+      text-align: center;
+    }
+    
+    .profil {
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .profil table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .profil table td {
+      vertical-align: top;
+      padding: 5px 0;
+    }
+    
+    .profil table td:first-child {
+      width: 40%;
+      color: #f7d794;
+      font-weight: bold;
+    }
+    
+    ul {
+      list-style: none;
+      margin-left: 20px;
+    }
+    
+    ul li {
+      margin-bottom: 5px;
+      position: relative;
+      padding-left: 15px;
+    }
+    
+    ul li::before {
+      content: "\2022";
+      position: absolute;
+      left: 0;
+      color: #f7d794;
+      font-size: 20px;
+      line-height: 1;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Cahaya Dewi</h1>
+      <p>Lulusan Baru</p>
+    </div>
+    
+    <div class="foto">
+      <img src="foto-formal.jpg" alt="Foto Cahaya Dewi" />
+    </div>
+    
+    <div class="content">
+      <div class="profil">
+        <div class="section-title">Profil Pribadi</div>
+        <table>
+          <tr><td>Nama</td><td>Cahaya Dewi</td></tr>
+          <tr><td>Tempat, Tanggal Lahir</td><td>Himalaya, 21 Desember 2004</td></tr>
+          <tr><td>Alamat</td><td>123 Anywhere St, Any City</td></tr>
+          <tr><td>Nomor Telepon</td><td>123-456-7890</td></tr>
+          <tr><td>Jenis Kelamin</td><td>Perempuan</td></tr>
+          <tr><td>Agama</td><td>Islam</td></tr>
+          <tr><td>Kewarganegaraan</td><td>Indonesia</td></tr>
+          <tr><td>Email</td><td>hello@reallygreatsite.com</td></tr>
+          <tr><td>Status</td><td>Belum Menikah</td></tr>
+        </table>
+      </div>
+      
+      <div class="pendidikan">
+        <div class="section-title">Pendidikan</div>
+        <ul>
+          <li>SDN 005, Kongbeng (2006-2012)</li>
+          <li>MTs Ibadurrahman, Tenggarong Seberang (2012-2015)</li>
+          <li>SMAN 1 WARDIERE INC. (2015-2018)</li>
+          <li>Universitas Muhammadiyah KALTIM (2018-2022)</li>
+        </ul>
+      </div>
+      
+      <div class="pengalaman">
+        <div class="section-title">Pengalaman</div>
+        <ul>
+          <li>Anggota Paskibraka Ma Ibadurrahman</li>
+          <li>Marching Band Ibadurrahman</li>
+        </ul>
+      </div>
+      
+      <div class="hobi">
+        <div class="section-title">Hobi</div>
+        <ul>
+          <li>Hiking</li>
+          <li>Baca Buku</li>
+          <li>Olahraga Sepak</li>
+          <li>Menonton Film</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

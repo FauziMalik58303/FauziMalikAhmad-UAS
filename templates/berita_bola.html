@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Berita Bola{% endblock %}
+{% block content %}
+    <h2>Berita Bola Terkini</h2>
+    <ul>
+        {% for item in berita %}
+            <li><strong>{{ item.judul }}</strong> - {{ item.tanggal }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

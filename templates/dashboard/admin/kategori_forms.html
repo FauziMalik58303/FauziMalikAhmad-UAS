@@ -1,0 +1,112 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block css %}
+<style>
+  .card {
+    background-color: #1e1e2f;
+    color: #fff;
+    border-radius: 12px;
+  }
+
+  .card-header {
+    background-color: #27293d;
+    border-bottom: 1px solid #444466;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-header .icon {
+    background: linear-gradient(60deg, #66bb6a, #43a047);
+    border-radius: 12px;
+    padding: 10px;
+    color: white;
+  }
+
+  .card-header h6 {
+    margin: 0;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  label.form-label {
+    color: #fff;
+    font-weight: 500;
+  }
+
+  input.form-control {
+    background-color: #2e2e42;
+    color: #fff;
+    border: 1px solid #444466;
+  }
+
+  input.form-control:focus {
+    background-color: #2e2e42;
+    color: #fff;
+    border-color: #66bb6a;
+    box-shadow: none;
+  }
+
+  .btn-save {
+    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+    color: #1e1e2f;
+    font-weight: 600;
+    border: none;
+  }
+
+  .btn-save:hover {
+    opacity: 0.85;
+  }
+</style>
+{% endblock css %}
+
+{% block content %}
+<div class="row mt-4">
+  <div class="col-lg-5 col-md-6 col-12">  <!-- Form ke kiri, tanpa mx-auto -->
+    <div class="card shadow-sm">
+      <div class="card-header p-3">
+        <div class="icon">
+          <i class="material-icons">category</i>
+        </div>
+        <h6 class="mb-0">Form Kategori</h6>
+      </div>
+      <div class="card-body pt-3">
+        <form method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="{{ forms.nama.id_for_label }}" class="form-label">Nama Kategori</label>
+            {{ forms.nama }}
+          </div>
+          <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-save px-4 py-2">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'dasboard/assets/js/plugins/choices.min.js' %}"></script>
+<script src="{% static 'dasboard/assets/js/plugins/quill.min.js' %}"></script>
+<script src="{% static 'dasboard/assets/js/plugins/flatpickr.min.js' %}"></script>
+<script src="{% static 'dasboard/assets/js/plugins/dropzone.min.js' %}"></script>
+<script>
+  if (document.querySelector('.datetimepicker')) {
+    flatpickr('.datetimepicker', {
+      allowInput: true
+    });
+  }
+
+  Dropzone.autoDiscover = false;
+  var drop = document.getElementById('dropzone');
+  if (drop) {
+    new Dropzone(drop, {
+      url: "/file/post",
+      addRemoveLinks: true
+    });
+  }
+</script>
+{% endblock js %}

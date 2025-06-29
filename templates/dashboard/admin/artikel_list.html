@@ -1,0 +1,189 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block css %}
+<style>
+  .card {
+    background-color: #1e1e2f;
+    color: #fff;
+  }
+
+  .card-header {
+    background-color: #27293d;
+    color: #fff;
+  }
+
+  .table {
+    color: #fff;
+  }
+
+  .table thead {
+    background-color: #343454;
+    color: #fff !important;
+  }
+
+  .table thead th {
+    color: #fff !important;
+  }
+
+  .table tbody tr {
+    border-bottom: 1px solid #444;
+    color: #fff;
+    background-color: #2a2a40;
+  }
+
+  .table-hover tbody tr:hover {
+    background-color: #3b3b5a !important;
+    color: #fff !important;
+  }
+
+  .badge-user {
+    background-color: rgba(0, 123, 255, 0.5);
+    color: #cce5ff;
+  }
+
+  .badge-status {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+    border-radius: 12px;
+    text-transform: capitalize;
+    color: #fff;
+  }
+
+  .badge-draft {
+    background-color: #6c757d;
+  }
+
+  .badge-published {
+    background-color: #228719;
+  }
+
+  .btn-warning {
+    background-color: #f0ad4e;
+    border-color: #eea236;
+    color: #1e1e2f;
+  }
+
+  .btn-warning:hover {
+    background-color: #ec971f;
+    border-color: #d58512;
+    color: #1e1e2f;
+  }
+
+  .btn-danger {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    color: #fff;
+  }
+
+  .btn-danger:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+    color: #fff;
+  }
+
+  .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: #fff;
+  }
+
+  .btn-icon i.material-icons {
+    color: #fff;
+  }
+
+  .card-header h5 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+  }
+
+  .btn-tambah {
+    font-size: 0.85rem;
+    color: #fff;
+    border-color: #fff;
+  }
+
+  .btn-tambah:hover {
+    background-color: #fff;
+    color: #1e1e2f;
+  }
+
+  .material-icons.text-dark {
+    color: #fff !important;
+  }
+</style>
+{% endblock css %}
+
+{% block content %}
+<div class="col-12">
+  <div class="card shadow-sm">
+    <!-- Card header -->
+    <div class="card-header pb-3">
+      <h5 class="mb-0">
+        <span><i class="material-icons text-dark me-2">library_books</i> Daftar Artikel</span>
+        <a class="btn btn-outline-primary btn-sm btn-tambah" href="{% url 'admin_artikel_tambah' %}">
+          <i class="material-icons me-1">add</i> Tambah
+        </a>
+      </h5>
+    </div>
+
+    <div class="table-responsive p-3">
+      <table class="table table-hover" id="datatable-search">
+        <thead class="thead-light">
+          <tr>
+            <th>No</th>
+            <th>Judul</th>
+            <th>Kategori</th>
+            <th>Status</th>
+            <th class="text-center">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for artikel in artikel %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+              <strong>{{ artikel.judul }}</strong><br />
+              <span class="badge-user">
+                <i class="material-icons" style="font-size: 14px;">person</i>
+                {{ artikel.created_by }}
+              </span>
+            </td>
+            <td>{{ artikel.kategori }}</td>
+            <td>
+              {% if artikel.status %}
+                <span class="badge-status badge-published">Published</span>
+              {% else %}
+                <span class="badge-status badge-draft">Draft</span>
+              {% endif %}
+            </td>
+            <td class="text-center">
+              <a class="btn btn-warning btn-sm btn-icon" href="{% url 'admin_artikel_update' artikel.id %}">
+                <i class="material-icons">edit</i> Edit
+              </a>
+              <a class="btn btn-danger btn-sm btn-icon" onclick="return confirm('Yakin ingin menghapus?')" href="{% url 'admin_artikel_delete' artikel.id %}">
+                <i class="material-icons">delete</i> Hapus
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'dasboard/assets/js/plugins/datatables.js' %}"></script>
+<script>
+  const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+    searchable: true,
+    fixedHeight: true
+  })
+</script>
+{% endblock js %}
