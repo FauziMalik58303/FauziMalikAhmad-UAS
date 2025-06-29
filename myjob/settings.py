@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os 
 from pathlib import Path
 
+import pymysql
+pymysql.install_as_MySQLdb()
+
+
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
