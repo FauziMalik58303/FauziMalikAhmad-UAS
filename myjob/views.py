@@ -6,8 +6,12 @@ from artikel.forms import KomentarForm
 # Beranda/Home
 def home(request):
     template_name = 'landingpage/home.html'
-    kategori_list = Kategori.objects.all()
-    artikel_list = ArtikelBlog.objects.all()
+    try:
+        kategori_list = Kategori.objects.all()
+        artikel_list = ArtikelBlog.objects.all()
+    except Exception as e:
+        from django.http import HttpResponse
+        return HttpResponse(f"<h3>Gagal ambil data dari database: {str(e)}</h3>")
 
     context = {
         "kategori": kategori_list,
@@ -15,6 +19,7 @@ def home(request):
         "title": "Rental Mobil - Home"
     }
     return render(request, template_name, context)
+
 
 # Detail Artikel + Komentar
 def artikel_detail(request, id):
