@@ -292,4 +292,6 @@ CKEDITOR_5_CONFIGS = {
 
 CSRF_TRUSTED_ORIGINS = [
     "https://fauzimalikahmad-uas-production.up.railway.app",
+    "fauzimalikahmad-uas-production.up.railway.app",
 ]
+
