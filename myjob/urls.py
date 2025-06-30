@@ -19,7 +19,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('artikel/<int:id>/', views.artikel_detail, name='artikel_detail'),
 
-    path('dashboard/', views.dashboard, name='dashboard'),
+    #path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard/artikel_list', views.artikel_list, name='artikel_list'),
 
     path('dashboard/', include("artikel.urls")),
@@ -27,7 +27,7 @@ urlpatterns = [
 
 #############################Authentication###############
     path('auth_login', login, name='login'),
-    path('auth_logout', login, name='logout'),
+    path('auth_logout', logout, name='logout'),
     path('registrasi', registrasi, name='registrasi'),
 
 ]
