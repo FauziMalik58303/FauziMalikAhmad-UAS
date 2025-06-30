@@ -294,3 +294,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://fauzimalikahmad-uas-production.up.railway.app",
 ]
 
+# Auto collect static files in Railway deployment
+if os.environ.get('RAILWAY_STATIC_DEPLOYMENT') == 'true':
+    from django.core.management import call_command
+    call_command('collectstatic', '--noinput')
