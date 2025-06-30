@@ -26,7 +26,7 @@ urlpatterns = [
     path('api/', include("artikel.urls_api")),
 
 #############################Authentication###############
-    #path('auth_login', login, name='login'),
+    path('auth_login', login, name='login'),
     path('auth_logout', logout, name='logout'),
     path('registrasi', registrasi, name='registrasi'),
 
