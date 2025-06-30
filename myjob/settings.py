@@ -189,6 +189,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'  # Setelah login, diarahkan ke halaman home
 LOGIN_URL = '/login/'  # URL login
 
+if os.environ.get('RAILWAY_STATIC_DEPLOYMENT') == 'true':
+    from django.core.management import call_command
+    call_command('collectstatic', '--noinput')
+
+
 customColorPalette = [
     {
         'color': 'hsl(4, 90%, 58%)',
