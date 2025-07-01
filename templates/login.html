@@ -65,7 +65,7 @@
             </div>
           </div>
           <div class="card-body">
-            <form role="form" method="POST" class="text-start">
+            <form role="form" method="POST" action="{% url 'login' %}" class="text-start">
                 {% csrf_token %}
               <div class="input-group input-group-static mb-4">
                 <label>Username</label>
