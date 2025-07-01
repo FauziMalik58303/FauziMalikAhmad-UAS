@@ -27,7 +27,7 @@ urlpatterns = [
 
 #############################Authentication###############
     path('auth_login', login, name='login'),
-    path('auth_logout', logout, name='logout'),
+    path('auth_logout', login, name='logout'),
     path('registrasi', registrasi, name='registrasi'),
 
 ]
